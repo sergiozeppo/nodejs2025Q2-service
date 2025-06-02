@@ -1,5 +1,7 @@
 import {
   BadRequestException,
+  forwardRef,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -7,10 +9,16 @@ import { v4 as uuidv4 } from 'uuid';
 import { isUUID } from 'class-validator';
 import { Track } from './tracks.interface';
 import { CreateTrackDto } from './create-track.dto';
+import { FavoritesService } from 'src/favorites/favorites.service';
 
 @Injectable()
 export class TracksService {
   private tracks: Track[] = [];
+
+  constructor(
+    @Inject(forwardRef(() => FavoritesService))
+    private favoritesService: FavoritesService,
+  ) {}
 
   getAll(): Track[] {
     return this.tracks;

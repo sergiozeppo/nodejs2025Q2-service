@@ -1,5 +1,7 @@
 import {
   BadRequestException,
+  forwardRef,
+  Inject,
   Injectable,
   NotFoundException,
   UnprocessableEntityException,
@@ -19,8 +21,11 @@ export class FavoritesService {
   };
 
   constructor(
+    @Inject(forwardRef(() => AlbumsService))
     private albumsService: AlbumsService,
+    @Inject(forwardRef(() => ArtistsService))
     private artistsService: ArtistsService,
+    @Inject(forwardRef(() => TracksService))
     private tracksService: TracksService,
   ) {}
 
