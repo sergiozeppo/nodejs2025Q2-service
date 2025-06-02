@@ -21,7 +21,7 @@ export class ArtistsService {
       throw new BadRequestException('Invalid Artist ID');
     }
 
-    const artist = this.artists.find((artist) => artist.id === id);
+    const artist = this.artists.find((x) => x.id === id);
     if (!artist) throw new NotFoundException('Artist not found');
     return artist;
   }
@@ -42,7 +42,7 @@ export class ArtistsService {
   }
 
   delete(id: string): void {
-    const deleteID = this.artists.findIndex((artist) => artist.id === id);
+    const deleteID = this.artists.findIndex((x) => x.id === id);
     if (deleteID === -1) throw new NotFoundException('Artist not found');
 
     this.artists.splice(deleteID, 1);

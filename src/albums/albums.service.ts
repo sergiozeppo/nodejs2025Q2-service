@@ -21,7 +21,7 @@ export class AlbumsService {
       throw new BadRequestException('Invalid Album ID');
     }
 
-    const album = this.albums.find((album) => album.id === id);
+    const album = this.albums.find((x) => x.id === id);
     if (!album) throw new NotFoundException('Album not found');
     return album;
   }
@@ -36,7 +36,7 @@ export class AlbumsService {
   }
 
   delete(id: string): void {
-    const index = this.albums.findIndex((album) => album.id === id);
+    const index = this.albums.findIndex((x) => x.id === id);
     if (index === -1) throw new NotFoundException('Album not found');
     this.albums.splice(index, 1);
   }
