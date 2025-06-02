@@ -46,6 +46,7 @@ export class TracksService {
   delete(id: string): void {
     const index = this.tracks.findIndex((x) => x.id === id);
     if (index === -1) throw new NotFoundException('Track not found');
+    this.favoritesService.deleteTrack(id);
     this.tracks.splice(index, 1);
   }
 
@@ -53,5 +54,21 @@ export class TracksService {
     const upTrack = this.getById(id);
     Object.assign(upTrack, updateTrack);
     return upTrack;
+  }
+
+  deleteAlbumFromTracks(albumId: string) {
+    this.tracks.forEach((track) => {
+      if (track.albumId === albumId) {
+        track.albumId = null;
+      }
+    });
+  }
+
+  deleteArtistFromTracks(artistId: string) {
+    this.tracks.forEach((track) => {
+      if (track.artistId === artistId) {
+        track.artistId = null;
+      }
+    });
   }
 }

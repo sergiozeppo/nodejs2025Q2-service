@@ -46,4 +46,8 @@ export class AlbumsController {
   ) {
     return this.albumsService.update(id, updateAlbum);
   }
+
+  deleteArtistFromAlbums(artistId: string) {
+    this.albumsService.deleteArtistFromAlbums(artistId);
+  }
 }

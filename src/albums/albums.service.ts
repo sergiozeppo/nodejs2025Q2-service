@@ -49,6 +49,8 @@ export class AlbumsService {
   delete(id: string): void {
     const index = this.albums.findIndex((x) => x.id === id);
     if (index === -1) throw new NotFoundException('Album not found');
+    this.tracksService.deleteAlbumFromTracks(id);
+    this.favoritesService.deleteAlbum(id);
     this.albums.splice(index, 1);
   }
 
@@ -56,5 +58,13 @@ export class AlbumsService {
     const album = this.getById(id);
     Object.assign(album, updateAlbum);
     return album;
+  }
+
+  deleteArtistFromAlbums(artistId: string) {
+    this.albums.forEach((album) => {
+      if (album.artistId === artistId) {
+        album.artistId = null;
+      }
+    });
   }
 }

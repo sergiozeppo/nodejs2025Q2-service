@@ -49,16 +49,19 @@ export class ArtistsService {
     return newbie;
   }
 
+  delete(id: string): void {
+    const deleteID = this.artists.findIndex((x) => x.id === id);
+    if (deleteID === -1) throw new NotFoundException('Artist not found');
+    this.albumsService.deleteArtistFromAlbums(id);
+    this.tracksService.deleteArtistFromTracks(id);
+    this.favoritesService.deleteArtist(id);
+
+    this.artists.splice(deleteID, 1);
+  }
+
   update(id: string, updateArtist: CreateArtistDto): Artist {
     const upArtist = this.getById(id);
     Object.assign(upArtist, updateArtist);
     return upArtist;
-  }
-
-  delete(id: string): void {
-    const deleteID = this.artists.findIndex((x) => x.id === id);
-    if (deleteID === -1) throw new NotFoundException('Artist not found');
-
-    this.artists.splice(deleteID, 1);
   }
 }

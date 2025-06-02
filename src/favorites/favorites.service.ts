@@ -45,7 +45,9 @@ export class FavoritesService {
     }
 
     this.isAlbumExists(albumId);
-    this.favorites.albums.push(albumId);
+    if (!this.favorites.albums.includes(albumId)) {
+      this.favorites.albums.push(albumId);
+    }
   }
 
   deleteAlbumFromFavs(albumId: string) {
@@ -61,7 +63,9 @@ export class FavoritesService {
     }
 
     this.isArtistExists(artistId);
-    this.favorites.artists.push(artistId);
+    if (!this.favorites.artists.includes(artistId)) {
+      this.favorites.artists.push(artistId);
+    }
   }
 
   deleteArtistFromFavs(artistId: string) {
@@ -77,7 +81,9 @@ export class FavoritesService {
     }
 
     this.isTrackExists(trackId);
-    this.favorites.tracks.push(trackId);
+    if (!this.favorites.tracks.includes(trackId)) {
+      this.favorites.tracks.push(trackId);
+    }
   }
 
   deleteTrackFromFavs(trackId: string) {
