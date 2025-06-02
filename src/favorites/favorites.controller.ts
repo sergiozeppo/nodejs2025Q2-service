@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { FavoritesService } from './favorites.service';
 import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { FavoritesResponseDto } from './favorites-response.dto';
 
 @Controller('favs')
 export class FavoritesController {
@@ -20,6 +21,7 @@ export class FavoritesController {
   @ApiResponse({
     status: 200,
     description: 'List of all favorites',
+    type: FavoritesResponseDto,
   })
   getAll() {
     return this.favoritesService.getAllFavs();
@@ -31,6 +33,7 @@ export class FavoritesController {
   @ApiResponse({
     status: 201,
     description: 'Artist added to favorites successfully',
+    type: FavoritesResponseDto,
   })
   @ApiResponse({
     status: 400,
@@ -67,6 +70,7 @@ export class FavoritesController {
   @ApiResponse({
     status: 201,
     description: 'Album added to favorites successfully',
+    type: FavoritesResponseDto,
   })
   @ApiResponse({
     status: 400,
@@ -127,6 +131,7 @@ export class FavoritesController {
   @ApiResponse({
     status: 201,
     description: 'Track added to favorites successfully',
+    type: FavoritesResponseDto,
   })
   @ApiResponse({
     status: 400,

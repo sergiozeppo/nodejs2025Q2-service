@@ -13,6 +13,7 @@ import {
 import { TracksService } from './tracks.service';
 import { CreateTrackDto } from './create-track.dto';
 import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { TrackResponseDto } from './tracks-response.dto';
 
 @Controller('track')
 export class TracksController {
@@ -20,7 +21,11 @@ export class TracksController {
 
   @Get()
   @ApiOperation({ summary: 'Get list of tracks' })
-  @ApiResponse({ status: 200, description: 'List of tracks' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of tracks',
+    type: TrackResponseDto,
+  })
   getAll() {
     return this.tracksService.getAll();
   }
@@ -28,7 +33,11 @@ export class TracksController {
   @Get(':id')
   @ApiOperation({ summary: 'Get track by ID' })
   @ApiParam({ name: 'id', description: 'Track UUID' })
-  @ApiResponse({ status: 200, description: 'Track found' })
+  @ApiResponse({
+    status: 200,
+    description: 'Track found',
+    type: TrackResponseDto,
+  })
   @ApiResponse({ status: 404, description: 'Track not found' })
   @ApiResponse({ status: 400, description: 'Invalid Track ID' })
   getById(@Param('id', new ParseUUIDPipe()) id: string) {
@@ -37,7 +46,11 @@ export class TracksController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new track' })
-  @ApiResponse({ status: 201, description: 'Track created successfully' })
+  @ApiResponse({
+    status: 201,
+    description: 'Track created successfully',
+    type: TrackResponseDto,
+  })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   @HttpCode(HttpStatus.CREATED)
   create(@Body() createTrackDto: CreateTrackDto) {
@@ -58,7 +71,11 @@ export class TracksController {
   @Put(':id')
   @ApiOperation({ summary: 'Update track' })
   @ApiParam({ name: 'id', description: 'Track UUID' })
-  @ApiResponse({ status: 200, description: 'Track updated successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Track updated successfully',
+    type: TrackResponseDto,
+  })
   @ApiResponse({ status: 404, description: 'Track not found' })
   @ApiResponse({ status: 400, description: 'Invalid Track ID' })
   update(

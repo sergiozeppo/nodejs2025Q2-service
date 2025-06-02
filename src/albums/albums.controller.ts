@@ -13,6 +13,7 @@ import {
 import { AlbumsService } from './albums.service';
 import { CreateAlbumDto } from './create-album.dto';
 import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { AlbumResponseDto } from './album-response.dto';
 
 @Controller('album')
 export class AlbumsController {
@@ -20,7 +21,11 @@ export class AlbumsController {
 
   @Get()
   @ApiOperation({ summary: 'Get list of albums' })
-  @ApiResponse({ status: 200, description: 'List of albums' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of albums',
+    type: AlbumResponseDto,
+  })
   getAll() {
     return this.albumsService.getAll();
   }
@@ -28,7 +33,11 @@ export class AlbumsController {
   @Get(':id')
   @ApiOperation({ summary: 'Get unique album by ID' })
   @ApiParam({ name: 'id', description: 'Album UUID' })
-  @ApiResponse({ status: 200, description: 'Album found' })
+  @ApiResponse({
+    status: 200,
+    description: 'Album found',
+    type: AlbumResponseDto,
+  })
   @ApiResponse({ status: 404, description: 'Album not found' })
   @ApiResponse({ status: 400, description: 'Invalid Album ID' })
   getById(@Param('id', new ParseUUIDPipe()) id: string) {
@@ -37,7 +46,11 @@ export class AlbumsController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new album' })
-  @ApiResponse({ status: 201, description: 'Album created successfully' })
+  @ApiResponse({
+    status: 201,
+    description: 'Album created successfully',
+    type: AlbumResponseDto,
+  })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   @HttpCode(HttpStatus.CREATED)
   create(@Body() createAlbum: CreateAlbumDto) {
@@ -58,7 +71,11 @@ export class AlbumsController {
   @Put(':id')
   @ApiOperation({ summary: 'Update album' })
   @ApiParam({ name: 'id', description: 'Album UUID' })
-  @ApiResponse({ status: 200, description: 'Album updated successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Album updated successfully',
+    type: AlbumResponseDto,
+  })
   @ApiResponse({ status: 404, description: 'Album not found' })
   @ApiResponse({ status: 400, description: 'Invalid Album ID' })
   update(
