@@ -1,6 +1,7 @@
 services:
   app:
     build: .
+    image: sergiozeppo/nodejs2025q2-service-app:latest
     ports:
       - "${PORT}:${PORT}" 
     environment:
