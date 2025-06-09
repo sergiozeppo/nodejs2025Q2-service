@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build: .
@@ -29,9 +27,11 @@ services:
       - app-network
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - pglogs:/var/log/postgresql/
 
 volumes:
   pgdata:
+  pglogs:
 
 networks:
   app-network:
