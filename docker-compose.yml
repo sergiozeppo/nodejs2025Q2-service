@@ -5,16 +5,19 @@ services:
     networks:
       - library
     environment:
+      POSTGRES_DB: ${DB_DATABASE}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE}
     ports:
       - '5432:${DB_PORT}'
+    env_file:
+    - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - postgres_logs:/var/log/postgresql
 
   app:
+    image: sergiozeppo/nodejs2025q2-service
     build:
       context: .
       dockerfile: Dockerfile
@@ -25,12 +28,14 @@ services:
       - library
     ports:
       - '4000:${PORT}'
+    env_file:
+    - .env
     environment:
       DATABASE_HOST: ${DB_HOST}
+      DATABASE_NAME:  ${DB_DATABASE}
       DATABASE_PORT: ${DB_PORT}
       DATABASE_USER: ${DB_USERNAME}
       DATABASE_PASSWORD: ${DB_PASSWORD}
-      DATABASE_NAME:  ${DB_DATABASE}
       CHOKIDAR_USEPOLLING: "true"
       WATCHPACK_POLLING: "true"
     volumes:
