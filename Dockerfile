@@ -1,6 +1,6 @@
-FROM node:22.16-alpine AS build
+FROM node:22.16-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -8,18 +8,6 @@ RUN npm ci
 
 COPY . .
 
-RUN npm run build
+RUN npm install --save-dev nodemon
 
-FROM node:22.16-alpine
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm ci
-
-COPY --from=build /usr/src/app/dist ./dist
-
-EXPOSE 4000
-
-CMD ["node", "dist/main.js"]
+CMD ["npx", "nodemon", "--ext", "ts,json", "--watch", "src", "--exec", "npm run start:dev"]
