@@ -1,5 +1,9 @@
 # Home Library Service
 
+## Description
+
+Home Library Service is a RESTful API built with Node.js and NestJS that allows users to manage their personal music collection. It provides functionality to create, retrieve, update, and delete data related to artists, tracks, and albums, as well as mark favorites in a user’s own home library.
+
 ## Prerequisites
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
@@ -19,13 +23,30 @@ npm install
 
 ## Running application
 
+Before starting the app you can change port in the **.env** file.
+By default its value defined to 4000.
+
+```
+PORT=4000
+```
+
+After that you can start the app using:
+
 ```
 npm start
 ```
 
-After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
+After starting the app you can open in your browser OpenAPI documentation
+by typing http://localhost:4000/doc/.
 For more information about OpenAPI/Swagger please visit https://swagger.io/.
+
+## API Documentation
+
+The API docs is generated with Swagger (OpenAPI) and available at:
+
+```
+http://localhost:4000/doc
+```
 
 ## Testing
 
